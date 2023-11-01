@@ -39,7 +39,7 @@ jobs:
           -Dsonar.projectKey="pos-api" \
           -Dsonar.sources=.
         env:
-          SONAR_HOST_URL: ${{ http://sonarqube.hyosung.com/projects }}  
+          SONAR_HOST_URL: "http://sonarqube.hyosung.com/projects"  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
       - name: Build Docker image
