@@ -29,6 +29,19 @@ jobs:
 
       # - name: Code Lint Check
       #   run: npm run lint
+      - name: Check SonarQube Reachability
+        run: |
+          ping -c 5 sonarqube.hyosung.com
+        continue-on-error: true
+
+      - name: Check Ping Status
+        run: |
+          if [ $? -eq 0 ]; then
+          echo "SonarQube is reachable."
+          else
+            echo "SonarQube is not reachable."
+            exit 1
+          fi
 
       - name: SonarQube Scan
         run: |
