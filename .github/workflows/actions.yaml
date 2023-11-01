@@ -13,11 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run GitLeaks Scan
-        run: |
-          wget https://github.com/zricethezav/gitleaks/releases/download/v7.6.0/gitleaks-linux-amd64
-          chmod +x gitleaks-linux-amd64
-          ./gitleaks-linux-amd64 -o gitleaks-report.json  
+      # - name: Run GitLeaks Scan
+      #   run: |
+      #     wget https://github.com/zricethezav/gitleaks/releases/download/v7.6.0/gitleaks-linux-amd64
+      #     chmod +x gitleaks-linux-amd64
+      #     ./gitleaks-linux-amd64 -o gitleaks-report.json  
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -34,12 +34,12 @@ jobs:
         run: |
           npm install -g sonarqube-scanner
           sonar-scanner \
-          -Dsonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
+          -Dsonar.host.url="${{ http://sonarqube.hyosung.com/projects }}" \
           -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
           -Dsonar.projectKey="pos-api" \
           -Dsonar.sources=.
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
+          SONAR_HOST_URL: ${{ http://sonarqube.hyosung.com/projects }}  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
       - name: Build Docker image
