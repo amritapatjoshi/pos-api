@@ -31,14 +31,13 @@ jobs:
       #   run: npm run lint
 
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        # run: |
-          # npm install -g sonarqube-scanner
-          # sonar-scanner \
-          # -Dsonar.host.url="http:localhost:9000" \
-          # -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
-          # -Dsonar.projectKey="pos-api" \
-          # -Dsonar.sources=.
+        run: |
+          npm install -g sonarqube-scanner
+          sonar-scanner \
+            -Dsonar.host.url="http:localhost:9000" \
+            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            -Dsonar.projectKey="pos-api" \
+            -Dsonar.sources=.
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
