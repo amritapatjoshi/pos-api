@@ -30,10 +30,15 @@ jobs:
       # - name: Code Lint Check
       #   run: npm run lint
 
-      - name: Set up kubectl
-        uses: azure/k8s-set-context@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          kubeconfig: ${{ secrets.kube_config }}
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ACCESS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Update the KubeCtl Conext
+        run: aws eks update-kubeconfig --region us-east-1 --name hysng-cluster
 
       - name: Port Forward to SonarQube
         run: |
