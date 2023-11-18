@@ -44,15 +44,15 @@ jobs:
 
       - name: SonarQube Scan
         run: |
-          curl -I http://localhost:9000
-        #   npm install -g sonarqube-scanner
-        #   sonar-scanner \
-        #     -Dsonar.host.url="http:localhost:9000" \
-        #     -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
-        #     -Dsonar.projectKey="pos-api" \
-        #     -Dsonar.sources=.
-        # env:
-        #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
+          # curl -I http://localhost:9000
+          npm install -g sonarqube-scanner
+          sonar-scanner \
+            -Dsonar.host.url="http:localhost:9000" \
+            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            -Dsonar.projectKey="pos-api" \
+            -Dsonar.sources=.
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
       # - name: Build Docker image
       #   run: docker build -t pos-api .
