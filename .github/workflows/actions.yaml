@@ -41,9 +41,7 @@ jobs:
         run: aws eks update-kubeconfig --region us-east-1 --name hysng-cluster
 
       - name: Port Forward to SonarQube
-        run: |
-          kubectl port-forward svc/sonarqube-sonarqube 9000:9000 -n devops &
-          curl http://localhost:9000
+        run: 'kubectl port-forward svc/sonarqube-sonarqube 9000:9000 -n devops &'
           
       - name: SonarQube Scan
         run: |
