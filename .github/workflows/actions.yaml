@@ -31,17 +31,15 @@ jobs:
       #   run: npm run lint
 
       - name: Set up kubectl
-        uses: aws/k8s-set-context@v1
+        uses: azure/k8s-set-context@v1
         with:
           kubeconfig: ${{ secrets.kube_config }}
 
       - name: Port Forward to SonarQube
         run: |
           kubectl port-forward svc/sonarqube-sonarqube 9000:9000 -n devops &
-          # sleep 5 # Give some time for port-forward to start
-    
-        
-
+          curl http://localhost:9000
+          
       - name: SonarQube Scan
         run: |
           # curl -I http://localhost:9000
