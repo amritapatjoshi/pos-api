@@ -46,25 +46,18 @@ jobs:
       - name: Test Sonarqube
         run: 'curl http://localhost:9000'
           
-      # - name: SonarQube Scan
-      #   run: |
-      #     # curl -I http://localhost:9000
-      #     npm install -g sonarqube-scanner
-      #     sonar-scanner \
-      #       -Dsonar.host.url="http:localhost:9000" \
-      #       -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
-      #       -Dsonar.projectKey="pos-api" \
-      #       -Dsonar.sources=.
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
-
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          sonar-token: ${{ secrets.SONAR_TOKEN }}
-          # scanner-version: '4.6.0'  # Specify the version of SonarScanner compatible with your SonarQube instance
+        run: |
+          # curl -I http://localhost:9000
+          npm install -g sonarqube-scanner
+          sonar-scanner \
+            -Dsonar.host.url="http:localhost:9000" \
+            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            -Dsonar.projectKey="pos-api" \
+            -Dsonar.sources=.
         env:
-          SONAR_HOST_URL: 'http:localhost:9000' 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
+
 
       # - name: Build Docker image
       #   run: docker build -t pos-api .
