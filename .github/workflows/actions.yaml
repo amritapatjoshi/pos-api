@@ -30,18 +30,33 @@ jobs:
       # - name: Code Lint Check
       #   run: npm run lint
 
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v1
+        with:
+          kubeconfig: ${{ secrets.kube_config }}
+
+      - name: Port Forward to SonarQube
+        run: |
+          kubectl port-forward svc/sonarqube-sonarqube 9000:9000 -n devops &
+          # sleep 5 # Give some time for port-forward to start
+    
+        
+
       - name: SonarQube Scan
         run: |
-          npm install -g sonarqube-scanner
-          sonar-scanner \
-            -Dsonar.host.url="http://sonarqube.hyosung.com" \
-            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
-            -Dsonar.projectKey="pos-api" \
-            -Dsonar.sources=.
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
+          curl -I http://localhost:9000
+        #   npm install -g sonarqube-scanner
+        #   sonar-scanner \
+        #     -Dsonar.host.url="http:localhost:9000" \
+        #     -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+        #     -Dsonar.projectKey="pos-api" \
+        #     -Dsonar.sources=.
+        # env:
+        #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
-      - name: Build Docker image
-        run: docker build -t pos-api .
+      # - name: Build Docker image
+      #   run: docker build -t pos-api .
 
-                             
+      - name: Stop Port Forward
+        run: |
+          pkill -f "kubectl port-forward"                         
