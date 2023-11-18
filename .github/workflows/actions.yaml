@@ -50,6 +50,7 @@ jobs:
         run: |
           # curl -I http://localhost:9000
           npm install -g sonarqube-scanner
+          sonar-scanner -X
           sonar-scanner \
             -Dsonar.host.url="http:localhost:9000" \
             -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
