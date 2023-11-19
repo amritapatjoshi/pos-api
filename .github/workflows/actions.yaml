@@ -53,11 +53,13 @@ jobs:
           sonar-scanner -X
           sonar-scanner \
             -Dsonar.host.url="http:localhost:9000" \
-            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            # -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            -Dsonar.login="amrita" \
+            -Dsonar.password="Aam" \
             -Dsonar.projectKey="pos-api" \
             -Dsonar.sources=.
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
+        # env:
+        #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
 
       # - name: Build Docker image
