@@ -53,7 +53,7 @@ jobs:
           sonar-scanner -X
           sonar-scanner \
             -Dsonar.host.url="http:localhost:9000" \
-            -Dsonar.login="sqa_6d4d7ce83bb3b05a6243c7e08cec5083e204d7da" \
+            -Dsonar.login="squ_0613e89e5c31a0a5b16ba8e383fd234574debcba" \
             # -Dsonar.login="amrita" \
             # -Dsonar.password="Aam" \
             -Dsonar.projectKey="pos-api" \
