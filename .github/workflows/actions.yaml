@@ -53,9 +53,9 @@ jobs:
           sonar-scanner -X
           sonar-scanner \
             -Dsonar.host.url="http:localhost:9000" \
-            # -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
-            -Dsonar.login="amrita" \
-            -Dsonar.password="Aam" \
+            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            # -Dsonar.login="amrita" \
+            # -Dsonar.password="Aam" \
             -Dsonar.projectKey="pos-api" \
             -Dsonar.sources=.
         # env:
