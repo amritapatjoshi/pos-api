@@ -56,7 +56,7 @@ jobs:
         run: |
           # curl -I http://localhost:9000
           npm install -g sonarqube-scanner
-          sonar-scanner -X
+          # sonar-scanner -X
           sonar-scanner \
           -Dsonar.host.url="http:localhost:9000" \
           -Dsonar.login="squ_0613e89e5c31a0a5b16ba8e383fd234574debcba" \
